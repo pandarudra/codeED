@@ -4,6 +4,7 @@ import "./globals.css";
 import { SessionProviderClient } from "@/providers/SessionProviderClient";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import Gradbg from "@/components/Gradbg"; // ✅ Import your Gradbg component
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,11 +27,18 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(authOptions);
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Background */}
+        <div className="fixed inset-0 -z-10">
+          <Gradbg />
+        </div>
+
+        {/* Foreground content */}
         <SessionProviderClient session={session}>
           {children}
         </SessionProviderClient>

@@ -1,10 +1,8 @@
-'use client';
-import React from 'react'
+"use client";
+import React from "react";
 
 const Landing = () => {
-  return (
-    <div>Landing</div>
-  )
-}
+  return <div className="text-white">Landing</div>;
+};
 
-export default Landing
+export default Landing;
