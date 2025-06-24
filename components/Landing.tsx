@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Button } from "@/components/ui/button"
@@ -446,4 +447,5 @@ const Landing = () => {
   )
 }
 
-export default Landing
+
+export default Landing;
