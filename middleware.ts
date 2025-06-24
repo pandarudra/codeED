@@ -3,21 +3,25 @@ import { NextResponse } from "next/server";
 
 export default withAuth(
   function middleware() {
-    // This runs **only** if `authorized` returns true
+    // Runs only when authorized() returns true
     return NextResponse.next();
   },
   {
-    pages: { signIn: "/login" }, // redirect unauthenticated users here
+    pages: {
+      signIn: "/login",
+    },
     callbacks: {
       authorized({ req, token }) {
         const path = req.nextUrl.pathname;
 
-        // Allow unprotected paths
-        if (path.startsWith("/api/auth") || path === "/login" || path === "/") {
-          return true;
-        }
+        //  Allow public pages
+        const publicPaths = ["/", "/login"];
+        const isPublic =
+          publicPaths.includes(path) || path.startsWith("/api/auth");
 
-        // Protect all other paths: require a valid session token
+        if (isPublic) return true;
+
+        //  Protect everything else
         return !!token;
       },
     },
@@ -25,5 +29,8 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|public/).*)"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|public/).*)",
+    "/dashboard/:path*",
+  ],
 };
