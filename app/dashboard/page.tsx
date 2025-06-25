@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Code, FileText, Bell } from "lucide-react";
+import LandingBG from "@/components/LandingBG";
 
 export default function DashboardPage() {
   const [activeSidebar, setActiveSidebar] = useState("code");
@@ -16,7 +17,11 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen flex bg-gradient-to-br from-[#0f172a] via-[#0c1222] to-[#00040f] text-white">
+      <div className="fixed inset-0 -z-10 w-full h-full">
+        <LandingBG />
+      </div>
       {/* Sidebar */}
+
       <aside className="w-20 backdrop-blur bg-white/5 border-r border-white/10 flex flex-col items-center py-6 space-y-6">
         {[
           { icon: Code, id: "code" },
