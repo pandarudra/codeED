@@ -16,3 +16,5 @@ export const s3 = new S3Client({
   },
   forcePathStyle: true,
 });
+
+export const BUCKET_NAME = process.env.B2_BUCKET_NAME!;
